@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>JavaScript Class</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
             var myName="Varma";
             var age=46;
@@ -231,9 +232,6 @@
 
             console.log(allTheaters);
 
-
-        
-
             movies.sort(function(a,b){
                 if(a.revenue>b.revenue) return 1;
                 if(a.revenue<b.revenue) return -1;
@@ -258,8 +256,295 @@
             //student.degree="MTech";
 
         </script>
+        <style>
+            .title{
+                color:purple;
+                font: 1em sans-serif;
+            }
+        
+        </style>
     </head> 
     <body>
         <h1>Welcome to JS Class</h1>
+        <ul>
+                <li>History</li>
+                <li>Variables & Types</li>
+                <li>Operators</li>
+                <li>Conditionals</li>
+                <li>Loops</li>
+                <li>Functions</li>
+                <li>Arrays</li>
+                <li>Array Iterators</li>
+                <li>Scope</li>
+                <li>Objects</li>
+                <li>String Functions</li>
+                <li>DOM & jQuery</li>
+                <li>Ajax</li>
+                <li>OOP in JavaScript</li>
+                <li>this keyword</li>
+                <li>HTML5 Storage</li>
+                <li>ES6</li>
+                <li>Advanced JavaScript</li>
+            </ul>
+        <h1>Hello</h1>
+        <h1>Goodbye</h1>
+        <ul>
+            <li id="highlight">List Item 1</li>
+            <li class="bolded">List Item 2</li>
+            <li class="bolded">List Item 3</li>
+        </ul>
+
+        <p>Title from server should come here</p>
+
+        <a href="http://yahoo.com">Yahoo!!!</a>
+
+        <button>Say Hello</button>
+
+        <div>Div 1</div>
+        <div class="highlight">Div 2</div>
+        <div id="third">Div 3</div>
+        <div class="highlight">Div 4</div>
     </body>
 </html>
+
+<script>
+
+    // var a=document.querySelector("a");
+    // a.setAttribute("href","http://google.com");
+    // a.textContent="Google";
+
+    // var h1=document.querySelector("h1"); //SELECT
+    // //h1.classList.add("title");
+    // //h1.innerHTML="<b>Thank you</b> for coming"
+
+    // h1.addEventListener("mouseover",function(){
+    //     h1.textContent="Thank you for coming"
+    // })
+
+    // h1.addEventListener("mouseout",function(){
+    //     h1.textContent="Welcome to JS class"
+    // })
+
+    // //h1.style.color="red" //MANIPULATE
+
+    // var firstLi=document.getElementById("highlight");
+    // firstLi.style.color="green";
+
+    // var boldedLis=document.getElementsByClassName("bolded")
+    // boldedLis[0].style.color="orange";
+
+    // var allH1s=document.getElementsByTagName("h1");
+    // allH1s[1].style.color="pink"
+
+    // var button=document.querySelector("button");
+    // button.addEventListener("dblclick",function(){
+    //     alert("hello")
+    // })
+
+
+
+    // // querySelector("#first")
+    // // querySelector(".special")
+    // // querySelector("p")
+    // // getElementById("first")
+
+
+    // // var body = document.querySelector("body"); //SELECT
+    // // var isBlue = false;
+
+    // // setInterval(function(){   //MANIPULATE
+    // //     if (isBlue) {
+    // //         body.style.background = "white"; 
+    // //     } else {
+    // //         body.style.background = "#3498db";
+    // //     }
+    // //     isBlue = !isBlue;
+    // // }
+    // // , 1000);
+</script>
+<script>
+    $("h1").css("color","red");
+    $("div").css("background-color","purple");
+    $(".highlight").css("width","200px");
+    $("#third").css("border","1px solid orange");
+    $("div:first").css("color","pink");
+
+    $("button").on("click",function(){
+        $.ajax({
+            url:'http://jsonplaceholder.typicode.com/posts/1',
+            success:function(data){
+                $("p").text(data.title);
+            },
+            error:function(error){
+                alert("Failed to get title")
+            }
+        })
+    })
+
+    $("h1:first").on("mouseover",function(){
+        $("h1:first").text("Thank you for coming")
+    })
+
+    $("h1:first").on("mouseout",function(){
+        $("h1:first").text("Welcome to JS Class")
+    })
+</script>
+<script>
+    /*
+        Class   - Model or Blueprint
+            - Properties
+            - Methods
+            - constructor
+
+        Object - instance of class
+
+        1. Encapsulation -- ******
+        2. Polymorphism
+        3. Inheritance --- ******
+        4. Abstraction
+    */
+
+    //constructor functions
+    // function Person(name,age){
+    //     this.name=name;
+    //     this.age=age;
+    // }
+
+    // Person.prototype.showProfile=function(){
+    //     console.log(this.name +","+ this.age)
+    // }
+
+    class Person{
+        constructor(name,age){
+            this.name=name;
+            this.age=age;
+        }
+
+        showProfile(){
+            console.log(this.name +","+ this.age)
+        }
+    }
+
+    //Creating instance of Person
+    var varma=new Person("Varma",46);
+    varma.showProfile();
+
+    // function Student(name,age,school){
+    //     this.school=school;
+    //     this.name=name;
+    //     this.age=age;
+    // }
+
+    // Student.prototype=new Person();
+
+    // Student.prototype.showSchool=function(){
+    //     console.log(this.school)
+    // }
+
+    class Student extends Person{
+        constructor(name,age,school){
+            super(name,age);
+            this.school=school;
+        }
+
+        showSchool(){
+            console.log(this.school)
+        }
+    }
+
+    var ram=new Student("Ram",19,"JNTU");
+    ram.showSchool();
+    ram.showProfile();
+
+
+    //HTML5 Storage API
+
+    //localStorage
+    //localStorage.setItem("username","varmab");
+    var username=localStorage.getItem("username");
+    localStorage.removeItem("username");
+    localStorage.clear();
+
+    //sessionStorage
+    sessionStorage.setItem("cartItems",JSON.stringify([]))
+    sessionStorage.getItem("cartItems");
+    sessionStorage.clear();
+    
+</script>
+<script>
+
+    var a=20;
+
+    if(true){
+        let a=30;
+        console.log(a); //30
+    }
+
+    console.log(a); //20
+
+    const PI=3.14;
+    //PI=2.12; Error
+
+    
+
+    var firstName="Varma"
+    var lastName="Bhupatiraju"
+    var address="MIG 27/1, Road #6"
+    var area="KPHB"
+    var city="Hyderabad"
+    var postalCode=530085
+
+    var shippingLabel=firstName + " " + lastName + "\n"
+            + address + "\n"
+            + area + ", " + city + "\n"
+            + postalCode;
+    console.log(shippingLabel);
+
+    var newShippingLabel=`
+        ${firstName} ${lastName}
+        ${address}
+        ${area}, ${city},
+        ${postalCode}
+        ${add(5,4)}
+    `
+    console.log(newShippingLabel)
+
+    function add(...numbers){
+       if(numbers.length==0) return 0;
+       return numbers.reduce(function(total,number){
+           return total+number;
+       })
+    }
+
+    var family=["varma","neelima","suma","father","mother","father-in-law","mother-in-law"];
+
+    // var me=family[0]
+    // var wife=family[1]
+    // var daughter=family[2]
+
+    var [me,wife,daughter,...others]=family;
+
+    var student={
+        name:"Varma",
+        age:46
+    }
+
+    // var myName=student.name;
+    // var myAge=student.age
+    var {name, age}=student;
+    console.log(name,age)
+
+
+    function add(a,b){
+        return a+b;
+    }
+
+    var sum=function(a,b){
+        return a+b;
+    }
+
+    var total=(a,b)=>{
+        return a+b;
+    }
+
+</script>
